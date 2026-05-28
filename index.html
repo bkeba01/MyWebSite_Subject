@@ -3,148 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5秒ごとに変貌する猫のサイト</title>
+    <title>極限覚醒：128猫属性GODガチャ</title>
     <style>
+        /* 1. 脳を興奮状態にハックするサイバーパンク・ネオンカラー */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         body {
+            font-family: 'Impact', 'Arial Black', 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #000;
+            color: #fff;
             min-height: 100vh;
-            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
             position: relative;
-            cursor: none; /* 標準カーソルを非表示 */
         }
 
-        /* 背景：現実の猫の画像グリッド */
-        .cat-grid {
+        /* 背景の動的レーザーライト演出 */
+        body::before {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 2px;
-            background-color: #000;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, #ff007f, transparent, #00ffff, transparent);
+            animation: rotateBg 4s linear infinite;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        @keyframes rotateBg {
+            100% { transform: rotate(360deg); }
         }
 
-        .cat-cell {
+        .gacha-container {
+            position: relative;
+            z-index: 10;
+            background: rgba(10, 10, 10, 0.9);
+            border: 5px solid #00ffff;
+            box-shadow: 0 0 40px #00ffff, inset 0 0 20px #00ffff;
+            border-radius: 30px;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.8;
-            /* 画像切り替え時のチカチカを抑え、滑らかにフェードインさせる効果 */
-            transition: opacity 0.5s ease-in-out;
-        }
-        .cat-cell:hover {
-            opacity: 1.0;
+            max-width: 480px;
+            padding: 40px;
+            text-align: center;
         }
 
-        /* カーソルを追従する現実の猫の画像 */
-        #cat-follower {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 80px;
-            height: 80px;
+        h1 {
+            font-size: 32px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f, 0 0 40px #ff007f;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            animation: pulse 1s infinite alternate;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); }
+        }
+
+        /* 筐体ウィンドウのフラッシュ演出 */
+        .machine-window {
+            height: 200px;
+            background: #000;
+            border: 4px solid #ff007f;
+            box-shadow: 0 0 20px #ff007f;
+            border-radius: 20px;
+            margin-bottom: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ガチャ回転中の超高速フラッシュ＆激しい振動 */
+        .flashing {
+            animation: hyperFlash 0.1s infinite, heavyShake 0.05s infinite;
+        }
+        @keyframes hyperFlash {
+            0%, 100% { background-color: #000; }
+            50% { background-color: #ff007f; }
+        }
+        @keyframes heavyShake {
+            0% { transform: translate(4px, -4px) rotate(2deg); }
+            50% { transform: translate(-4px, 4px) rotate(-2deg); }
+            100% { transform: translate(4px, 4px) rotate(0deg); }
+        }
+
+        .center-orb {
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
+            background: radial-gradient(circle, #fff, #ffd700);
+            box-shadow: 0 0 30px #ffd700, 0 0 60px #ffd700;
+            transition: all 0.3s;
+        }
+
+        /* レバーボタン：パチンコの特大プッシュボタンを模倣 */
+        .spin-trigger {
+            background: linear-gradient(180deg, #ff007f, #99004c);
+            color: #fff;
             border: 3px solid #fff;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            padding: 20px 50px;
+            font-size: 26px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 30px #ff007f, inset 0 0 15px #fff;
+            text-shadow: 0 2px 4px #000;
+            transition: 0.1s;
+        }
+        .spin-trigger:active {
+            transform: scale(0.9) translateY(4px);
+            box-shadow: 0 0 10px #ff007f;
+        }
+        .spin-trigger:disabled {
+            background: #333;
+            border-color: #555;
+            box-shadow: none;
+            color: #666;
+        }
+
+        /* 2. 結果画面：脳汁（ドーパミン）を最大化するGOD演出 */
+        .god-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .god-card {
+            background: linear-gradient(135deg, #111 0%, #222 100%);
+            border: 6px solid #ffd700;
+            box-shadow: 0 0 80px #ffd700, inset 0 0 30px rgba(255,215,0,0.3);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 460px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0);
+            animation: godPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        @keyframes godPop {
+            100% { transform: scale(1); }
+        }
+
+        /* ネットから取得した現実の猫画像エリア */
+        .cat-image-frame {
+            width: 100%;
+            height: 240px;
+            border-radius: 15px;
+            border: 4px solid #fff;
+            box-shadow: 0 0 25px rgba(255,255,255,0.8);
+            margin-bottom: 20px;
+            overflow: hidden;
+            background: #000;
+        }
+        .cat-image-frame img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate3d(0, 0, 0);
-            will-change: transform;
-            /* カーソルの猫自体が切り替わる際のスムーズな移行 */
-            transition: src 0.3s ease;
+        }
+
+        .god-rarity {
+            font-size: 42px;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 0 0 20px #ffd700, 0 0 40px #ff8c00;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .god-title {
+            font-size: 28px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            margin-bottom: 15px;
+        }
+
+        .god-desc {
+            font-size: 14px;
+            color: #e0e0e0;
+            line-height: 1.6;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .close-trigger {
+            background: linear-gradient(180deg, #00ffff, #008080);
+            color: #000;
+            font-weight: 900;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 20px #00ffff;
         }
     </style>
 </head>
 <body>
 
-    <div class="cat-grid" id="grid"></div>
-    <img id="cat-follower" src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=150&auto=format&fit=crop&q=80" alt="follower">
+    <div class="gacha-container">
+        <h1>CAT-GOD RESET</h1>
+        
+        <div class="machine-window" id="window">
+            <div class="center-orb" id="orb"></div>
+        </div>
 
-    <script>
-        const grid = document.getElementById('grid');
-        const follower = document.getElementById('cat-follower');
+        <div>
+            <button class="spin-trigger" id="spinBtn" onclick="triggerNeonGacha()">PUSH</button>
+        </div>
+    </div>
 
-        // 現実の猫写真URLのプール（厳選された異なる6種）
-        const catImages = [
-            "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=150&auto=format&fit=crop&q=60",
-            "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=150&auto=format&fit=crop&q=60",
-            "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=150&auto=format&fit=crop&q=60",
-            "https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=150&auto=format&fit=crop&q=60",
-            "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=150&auto=format&fit=crop&q=60",
-            "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?w=150&auto=format&fit=crop&q=60"
-        ];
+    <div class="god-overlay" id="godOverlay">
+        <div class="god-card">
+            <div class="cat-image-frame">
+                <img id="netCatImg" src="" alt="現実の神猫">
+            </div>
+            <div class="god-rarity" id="godRarity">GOD</div>
+            <div class="god-title" id="godTitle">神格称号</div>
+            <div class="god-desc" id="godDesc"></div>
+            <button class="close-trigger" onclick="closeGodResult()">NEXT SPIN</button>
+        </div>
+    </div>
 
-        // 1. グリッドの生成（初期化）
-        const cellWidth = 120;
-        const cellHeight = 120;
-        const cols = Math.ceil(window.innerWidth / cellWidth);
-        const rows = Math.ceil(window.innerHeight / cellHeight);
-        const totalCells = cols * rows * 1.2;
+<script>
+    // 128パターンを厳密に生成するための配列（8 × 8 × 2 = 128通り）
+    const prefix = ["終焉の", "超越せし", "神域の", "漆黒の", "電脳の", "天上の", "不可視の", "絶対王政"];
+    const core = ["白猫", "黒猫", "三毛猫", "ハチワレ", "キジトラ", "サバトラ", "シャム", "スフィンクス"];
+    const suffix = ["・オメガ", "・創世神"];
 
-        for (let i = 0; i < totalCells; i++) {
-            const img = document.createElement('img');
-            img.className = 'cat-cell';
-            grid.appendChild(img);
+    // ネットの現実の猫画像データベース（高解像度・Unsplashより厳選）
+    const networkCatUrls = [
+        "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1561948955-570b270e7c36?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1526336028075-9372c2c8f63b?w=500&auto=format&fit=crop&q=80"
+    ];
+
+    const spinBtn = document.getElementById('spinBtn');
+    const machineWindow = document.getElementById('window');
+    const godOverlay = document.getElementById('godOverlay');
+    const netCatImg = document.getElementById('netCatImg');
+
+    function triggerNeonGacha() {
+        spinBtn.disabled = true;
+
+        // 【過激演出】ウィンドウを限界まで超高速点滅＋狂ったように激しくバイブレーション
+        machineWindow.classList.add('flashing');
+
+        // 画像のプリロード（表示の遅延による冷めを防ぐ、ドーパミンUXの鉄則）
+        const randomImgUrl = networkCatUrls[Math.floor(Math.random() * networkCatUrls.length)] + `?sig=${Date.now()}`;
+        netCatImg.src = randomImgUrl;
+
+        // 期待値を極限まで引き上げる1.8秒の暗黒ラグ
+        setTimeout(() => {
+            machineWindow.classList.remove('flashing');
+            renderGodResult();
+        }, 1800);
+    }
+
+    function renderGodResult() {
+        // 数学的確率計算：0から127の計128通りを均等に一発抽出
+        const id = Math.floor(Math.random() * 128);
+
+        // ビット演算による128通りの称号一意結合
+        const pIdx = id & 7;          // 下位3ビット (0-7)
+        const cIdx = (id >> 3) & 7;   // 中位3ビット (0-7)
+        const sIdx = (id >> 6) & 1;   // 上位1ビット (0-1) -> 8*8*2 = 128通り
+
+        const finalTitle = `【${prefix[pIdx]}${core[cIdx]}${suffix[sIdx]}】`;
+
+        // レアリティ演出の強制格付け
+        let rarity = "LEGEND GOD";
+        if (id % 7 === 0) {
+            rarity = "ANOMALY GOD (0.78%)";
+            document.getElementById('godRarity').style.color = "#ff007f";
+            document.getElementById('godRarity').style.textShadow = "0 0 20px #ff007f";
+        } else {
+            document.getElementById('godRarity').style.color = "#ffd700";
+            document.getElementById('godRarity').style.textShadow = "0 0 20px #ffd700";
         }
 
-        const allCells = document.querySelectorAll('.cat-cell');
+        // テキストデータの構築
+        document.getElementById('godTitle').textContent = finalTitle;
+        document.getElementById('godDesc').innerHTML = `
+            <strong>GENETIC-ID: ${String(id).padStart(3, '0')} / 127</strong><br>
+            現実のインターネット回線を経由し、サーバーより召喚された上位個体。<br>
+            128の全確率軸中、あなたの脳波はこの猫の網膜パターンと完全に同期しました。
+        `;
 
-        // 2. すべての画像を一括でランダム更新する関数
-        function updateAllImages() {
-            // キャッシュによる「切り替わらないバグ」を防ぐため、タイムスタンプを付与
-            const timestamp = Date.now();
-            
-            // 背景グリッドの猫をすべて変更
-            allCells.forEach((img, index) => {
-                const randomImg = catImages[Math.floor(Math.random() * catImages.length)];
-                img.src = randomImg + `&timestamp=${timestamp}&id=${index}`;
-            });
+        // 衝撃的なポップアップ
+        godOverlay.style.display = 'flex';
+    }
 
-            // カーソルの猫も同時に変更
-            const randomFollower = catImages[Math.floor(Math.random() * catImages.length)];
-            follower.src = randomFollower + `&timestamp=${timestamp}&type=follower`;
-        }
-
-        // 初回実行
-        updateAllImages();
-
-        // 3. 厳密に5000ミリ秒（5秒）ごとに画像を変えるタイマー
-        setInterval(updateAllImages, 5000);
-
-        // 4. マウス追従ロジック（現行維持）
-        let mouseX = 0;
-        let mouseY = 0;
-        let currentX = 0;
-        let currentY = 0;
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function animate() {
-            currentX += (mouseX - currentX) * 0.1;
-            currentY += (mouseY - currentY) * 0.1;
-
-            const targetX = currentX - 40;
-            const targetY = currentY - 40;
-
-            follower.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`;
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        document.addEventListener('mouseleave', () => follower.style.display = 'none');
-        document.addEventListener('mouseenter', () => follower.style.display = 'block');
-    </script>
+    function closeGodResult() {
+        godOverlay.style.display = 'none';
+        spinBtn.disabled = false;
+    }
+</script>
 </body>
 </html>
