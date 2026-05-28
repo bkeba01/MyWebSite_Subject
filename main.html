@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Cat Lovers | 猫大好き専用サイト</title>
+    <style>
+        /* 基本リセットと共通スタイル */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            background-color: #fcf9f5;
+            line-height: 1.6;
+        }
+
+        /* ヘッダー */
+        header {
+            background-color: #ffffff;
+            border-bottom: 2px solid #f0e6df;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        header h1 {
+            color: #d97736;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        /* メインビジュアル */
+        .hero {
+            background-color: #f3e8e2;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .hero h2 {
+            font-size: 28px;
+            color: #4a3728;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 16px;
+            color: #705c4e;
+        }
+
+        /* コンテンツエリア */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #4a3728;
+            margin-bottom: 20px;
+            border-left: 5px solid #d97736;
+            padding-left: 10px;
+        }
+
+        /* ギャラリー（グリッドレイアウト） */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .cat-card {
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #f0e6df;
+            transition: transform 0.2s;
+        }
+        .cat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ダミー画像エリア（実際の開発時はここを<img>タグかAPI画像に置き換える） */
+        .cat-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #e0d5cd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        /* サンプルとして色を変えて識別しやすく配置 */
+        .img-1 { background-color: #e2b49a; }
+        .img-2 { background-color: #cda48e; }
+        .img-3 { background-color: #bfa08f; }
+
+        .cat-info {
+            padding: 15px;
+        }
+        .cat-info h3 {
+            font-size: 18px;
+            color: #4a3728;
+            margin-bottom: 5px;
+        }
+        .cat-info p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        /* ボタン */
+        .btn-fav {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            background-color: #d97736;
+            color: #ffffff;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .btn-fav:hover {
+            background-color: #be6226;
+        }
+
+        /* フッター */
+        footer {
+            background-color: #4a3728;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>NEKO Lyfe</h1>
+    </header>
+
+    <section class="hero">
+        <h2>全ての猫好きのための空間</h2>
+        <p>厳選された猫の情報と写真をお届けします。</p>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">本日のピックアップ</h2>
+        
+        <div class="gallery-grid">
+            <article class="cat-card">
+                <div class="cat-image-placeholder img-1">Cat Photo 01</div>
+                <div class="cat-info">
+                    <h3>ミケ（雑種）</h3>
+                    <p>日向ぼっこが大好きなのんびり屋さん。</p>
+                    <button class="btn-fav" onclick="alert('お気に入りに登録しました（モック動作）')">お気に入り登録</button>
+                </div>
